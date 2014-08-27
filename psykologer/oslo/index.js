@@ -4,20 +4,14 @@
 
 var root = process.cwd();
 
-var pageUtil = require(root + '/src/pageUtil');
-
 var fs = require('fs'),
     PDFParser = require("pdf2json/pdfparser"),
     pageUtil = require(root + '/src/pageUtil'),
-    htmlMaker = require(root + '/src/htmlMaker'),
-    dot = require('dot'),
-    page = fs.readFileSync(root + '/src/template/page.template.html', 'utf8'),
-    people = fs.readFileSync(root + '/src/template/people.template.html', 'utf8');
+    htmlMaker = require(root + '/src/htmlMaker');
 
 var pathToPdf = __dirname + "/Psykologer_Oslo_telefonliste.pdf";
 
 var pdfParser = new PDFParser();
-
 
 // denne bør bare returnere grid
 // løses med ett async/promise biblotek
