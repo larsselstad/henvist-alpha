@@ -1,18 +1,15 @@
+// TODO: sanere denne?
+
 /*jshint node: true*/
 var fs = require('fs'),
-    dot = require('dot'),
-    page = fs.readFileSync('./site/template/page.template.html', 'utf8'),
-    people = fs.readFileSync('./site/template/people.template.html', 'utf8');
+    dot = require('dot');
 
-function out(text) {
-    return text || '&nbsp;';
-}
+module.exports = function (root, dir, psykologer, nevropsykologer) {
+    var page = fs.readFileSync(root + '/src/template/page.template.html', 'utf8');
+    var people = fs.readFileSync(root + '/src/template/people.template.html', 'utf8');
 
-module.exports = function (psykologer, nevropsykologer) {
+    var html = fs.createWriteStream(dir + '/index.html');
 
-    var html = fs.createWriteStream('./site/table.html');
-
-    // TODO: Løs HTML generering med templates
     var peopleTempFn = dot.template(people);
     var pageTempFn = dot.template(page);
 

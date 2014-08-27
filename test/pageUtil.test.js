@@ -1,7 +1,7 @@
 /*jshint node: true*/
 
 var assert = require('assert'),
-    pageUtil = require('../util/pageUtil');
+    pageUtil = require('../src/pageUtil');
 
 function makeTextValue(word, x, y) {
     return {

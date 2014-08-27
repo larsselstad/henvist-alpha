@@ -8,7 +8,8 @@ function safePrint(value) {
 
 function getCorrection(name) {
     try {
-        return require('../correction/' + name);
+        //return require('../correction/' + name);
+        return;
     } catch (e) {
         console.log(e);
 
