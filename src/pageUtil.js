@@ -6,17 +6,6 @@ function safePrint(value) {
     return value || '';
 }
 
-function getCorrection(name) {
-    try {
-        //return require('../correction/' + name);
-        return;
-    } catch (e) {
-        console.log(e);
-
-        return;
-    }
-}
-
 function hasProp(object, prop) {
     return object && object.hasOwnProperty(prop);
 }
@@ -120,9 +109,9 @@ var pageUtil = {
         }
     },
 
-    objectifyArray: function (array) {
-        var nameCorrections = getCorrection('nameCorrection');
-        var phoneCorrections = getCorrection('phoneCorrection');
+    objectifyArray: function (array, corrections) {
+        var nameCorrections = corrections.name;
+        var phoneCorrections = corrections.phone;
 
         return {
             name: this.name(safePrint(array[0]), nameCorrections),
@@ -135,9 +124,15 @@ var pageUtil = {
         };
     },
 
-    extractData: function (grid, categories) {
+    extractData: function (grid, categories, corrections) {
+        if (!grid) {
+            throw new TypeError('extractData needs grid');
+        }
         if (!categories) {
-            console.error('extractData needs categories');
+            throw new TypeError('extractData needs categories');
+        }
+        if (!corrections) {
+            throw new TypeError('extractData needs corrections');
         }
 
         var pageUtil = this,
@@ -166,7 +161,7 @@ var pageUtil = {
             } else {
                 if (data[currentCategory]) {
                     //console.log('Legger til rad: ' + row + ' i kategori: ' + currentCategory);
-                    data[currentCategory].push(pageUtil.objectifyArray(row));
+                    data[currentCategory].push(pageUtil.objectifyArray(row, corrections));
                 } else {
                     console.log('Rad som ikke er i en kategori: ' + row);
                 }

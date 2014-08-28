@@ -118,7 +118,7 @@ module.exports = {
                 'Category: 2': 'Category: 2'
             };
 
-        var data = pageUtil.extractData(grid, categories);
+        var data = pageUtil.extractData(grid, categories, {});
 
         //console.log(data);
 
@@ -144,7 +144,7 @@ module.exports = {
             '20',
             'Kommentar'];
 
-        var object = pageUtil.objectifyArray(array);
+        var object = pageUtil.objectifyArray(array, {});
 
         assertObject(array[0], object.name, 'Name');
         assertObject(array[1], object.workAdress, 'Work adress');
@@ -162,7 +162,7 @@ module.exports = {
             undefined,
             'Kommentar'];
 
-        var object2 = pageUtil.objectifyArray(arrayUndefined);
+        var object2 = pageUtil.objectifyArray(arrayUndefined, {});
 
         assertObject(arrayUndefined[0], object2.name, 'Name');
         assertObject(arrayUndefined[1], object2.workAdress, 'Work adress');

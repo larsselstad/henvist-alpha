@@ -9,6 +9,25 @@ var fs = require('fs'),
     pageUtil = require(root + '/src/pageUtil'),
     htmlMaker = require(root + '/src/htmlMaker');
 
+var corrections = {
+    name: {
+        'nicke, Erik': 'Stänicke, Erik'
+    },
+    phone: {
+        '2424270': '22424270',
+        '2430824': '22430824',
+        '2468163': '22468163',
+        '2600200': '22600200',
+        '2845125': '22845125',
+        '2563567': '22563567',
+        '2581783': '22581783',
+        '2923759': '22923759',
+        '2491197': '22491197',
+        '689804': '21689804',
+        '8174959': '48174959'
+    }
+};
+
 var pathToPdf = __dirname + "/Psykologer_Oslo_telefonliste.pdf";
 
 var pdfParser = new PDFParser();
@@ -25,7 +44,7 @@ pdfParser.on("pdfParser_dataReady", function (pdfData) {
     var pagesData = pageUtil.extractData(grid, {
         'Psykologer:': 'Psykologer:',
         'Nevropsykologer:': 'Nevropsykologer:'
-    });
+    }, corrections);
 
     htmlMaker(root, __dirname, pagesData['Psykologer:'], pagesData['Nevropsykologer:']);
 });
