@@ -4,27 +4,20 @@
 var fs = require('fs'),
     dot = require('dot');
 
-module.exports = function (root, dir, psykologer, nevropsykologer) {
-    var page = fs.readFileSync(root + '/src/template/page.template.html', 'utf8');
-    var people = fs.readFileSync(root + '/src/template/people.template.html', 'utf8');
+module.exports = function (root, dir, title, people) {
+    var pageTemplate = fs.readFileSync(root + '/src/template/page.template.html', 'utf8');
+    var peopleTemplate = fs.readFileSync(root + '/src/template/people.template.html', 'utf8');
 
     var html = fs.createWriteStream(dir + '/index.html');
 
-    var peopleTempFn = dot.template(people);
-    var pageTempFn = dot.template(page);
-
-    var peopleRes1 = peopleTempFn({
-        tittel: 'Psykologer',
-        personer: psykologer
-    });
-
-    var peopleRes2 = peopleTempFn({
-        tittel: 'Nevropsykologer',
-        personer: nevropsykologer
-    });
+    var peopleTempFn = dot.template(peopleTemplate);
+    var pageTempFn = dot.template(pageTemplate);
 
     var pageRes = pageTempFn({
-        body: peopleRes1 + peopleRes2
+        body: peopleTempFn({
+            tittel: title,
+            personer: people
+        })
     });
 
     html.end(pageRes);

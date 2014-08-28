@@ -10,20 +10,8 @@ var fs = require('fs'),
     htmlMaker = require(root + '/src/htmlMaker');
 
 var corrections = {
-    name: {
-        'nicke, Erik': 'Stänicke, Erik'
-    },
     phone: {
-        '2424270': '22424270',
-        '2430824': '22430824',
-        '2468163': '22468163',
-        '2600200': '22600200',
-        '2845125': '22845125',
-        '2563567': '22563567',
-        '2581783': '22581783',
-        '2923759': '22923759',
         '2491197': '22491197',
-        '689804': '21689804',
         '8174959': '48174959'
     }
 };
@@ -46,7 +34,7 @@ pdfParser.on("pdfParser_dataReady", function (pdfData) {
         'Nevropsykologer:': 'Nevropsykologer:'
     }, corrections);
 
-    htmlMaker(root, __dirname, 'Psykologer', pagesData['Psykologer:']);
+    htmlMaker(root, __dirname, 'Nevropsykologer', pagesData['Nevropsykologer:']);
 });
 
 pdfParser.on("pdfParser_dataError", function (data) {
