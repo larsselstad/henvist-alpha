@@ -1,5 +1,6 @@
 Viktig
 + egen mappe og fil for nevropsykologer
++ sett title i template
 - Sider viser sist oppdatert og kilde
 - E2E tester: En test pdf
 - E2E tester: Sjekk at html blir generert, og med riktig data

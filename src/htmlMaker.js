@@ -17,7 +17,8 @@ module.exports = function (root, dir, title, people) {
         body: peopleTempFn({
             tittel: title,
             personer: people
-        })
+        }),
+        title: title
     });
 
     html.end(pageRes);
