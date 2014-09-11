@@ -1,7 +1,9 @@
 /*jshint node: true*/
 
+var root = process.cwd();
+
 var assert = require('assert'),
-    pageUtil = require('../src/pageUtil');
+    pageUtil = require(root + '/src/pageUtil');
 
 function makeTextValue(word, x, y) {
     return {

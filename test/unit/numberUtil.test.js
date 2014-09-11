@@ -1,7 +1,9 @@
 /*jshint node: true*/
 
+var root = process.cwd();
+
 var assert = require('assert'),
-    numberUtil = require('../src/numberUtil');
+    numberUtil = require(root + '/src/numberUtil');
 
 module.exports = {
     betweenTest: function () {
