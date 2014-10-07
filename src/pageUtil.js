@@ -56,7 +56,7 @@ var pageUtil = {
             //console.log(circaX + ' ' + textValue.x + ' ' + text);
 
             if (!numberUtil.almostEqual(lastY, circaY)) {
-                rowArray = new Array(7);
+                rowArray = [];
 
                 grid.push(rowArray);
             }
@@ -88,6 +88,63 @@ var pageUtil = {
             }
 
             lastY = circaY;
+        };
+    },
+    extractRows: function (grid) {
+        var lastY,
+            rowArray;
+
+        return function (textValue) {
+            var text = decodeURIComponent(textValue.R[0].T).trim();
+            var circaX = parseInt(textValue.x, 10);
+            var circaY = Math.round(parseFloat(textValue.y) * 10);
+
+            if (!numberUtil.almostEqual(lastY, circaY)) {
+                rowArray = [];
+
+                grid.push(rowArray);
+            }
+
+            rowArray.push({
+                text: text,
+                x: circaX
+            });
+
+            lastY = circaY;
+        };
+    },
+    mapRow: function (masterRow) {
+        return function (grid) {
+            return grid.map(function (row) {
+                var rowArray = new Array(masterRow.length);
+
+                row.forEach(function (el) {
+                    var text = el.text;
+                    var xValue = el.x;
+
+                    // TODO: maybe, just maybe, this could have been solved in a better way
+
+                    if (numberUtil.between(xValue, masterRow[0].x - 2, masterRow[1].x - 1)) {
+                        rowArray[0] = text;
+                    } else if (numberUtil.between(xValue, masterRow[1].x - 2, masterRow[2].x - 1)) {
+                        rowArray[1] = text;
+                    } else if (numberUtil.between(xValue, masterRow[2].x - 2, masterRow[3].x - 1)) {
+                        rowArray[2] = text;
+                    } else if (numberUtil.between(xValue, masterRow[3].x - 2, masterRow[4].x - 1)) {
+                        rowArray[3] = text;
+                    } else if (numberUtil.between(xValue, masterRow[4].x - 2, masterRow[5].x - 1)) {
+                        rowArray[4] = text;
+                    } else if (numberUtil.between(xValue, masterRow[5].x - 2, masterRow[6].x - 1)) {
+                        rowArray[5] = text;
+                    } else if (numberUtil.between(xValue, masterRow[6].x - 2, 120)) {
+                        rowArray[6] = text;
+                    } else {
+                        console.log('else: ' + xValue + ' ' + text);
+                    }
+                });
+
+                return rowArray;
+            });
         };
     },
 

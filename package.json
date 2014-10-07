@@ -3,13 +3,19 @@
     "version": "0.0.1",
     "description": "Samle alle spesialistene på en side",
     "main": "index.js",
-    "scripts": {
-        "test": "node test/unit/specrunner.js"
-    },
     "author": "",
     "license": "ISC",
     "devDependencies": {
         "pdf2json": "^0.6.7",
-        "dot": "^1.0.2"
+        "dot": "^1.0.2",
+        "step": "0.0.5"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/larsselstad/henvist-alpha.git"
+    },
+    "scripts": {
+        "test-int": "node test/integration/specrunner.js",
+        "test": "node test/unit/specrunner.js"
     }
 }
