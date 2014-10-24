@@ -6,6 +6,10 @@ function safePrint(value) {
     return value || '';
 }
 
+function isBeetween(x, current, next) {
+    return numberUtil.between(x, current - 2, next - 1);
+}
+
 function hasProp(object, prop) {
     return object && object.hasOwnProperty(prop);
 }
@@ -113,39 +117,37 @@ var pageUtil = {
             lastY = circaY;
         };
     },
-    mapRow: function (masterRow) {
-        return function (grid) {
-            return grid.map(function (row) {
-                var rowArray = new Array(masterRow.length);
+    mapRow: function (grid, masterRow) {
+        return grid.map(function (row) {
+            var rowArray = new Array(masterRow.length);
 
-                row.forEach(function (el) {
-                    var text = el.text;
-                    var xValue = el.x;
+            row.forEach(function (el) {
+                var text = el.text;
+                var xValue = el.x;
 
-                    // TODO: maybe, just maybe, this could have been solved in a better way
+                // TODO: maybe, just maybe, this could have been solved in a better way
 
-                    if (numberUtil.between(xValue, masterRow[0].x - 2, masterRow[1].x - 1)) {
-                        rowArray[0] = text;
-                    } else if (numberUtil.between(xValue, masterRow[1].x - 2, masterRow[2].x - 1)) {
-                        rowArray[1] = text;
-                    } else if (numberUtil.between(xValue, masterRow[2].x - 2, masterRow[3].x - 1)) {
-                        rowArray[2] = text;
-                    } else if (numberUtil.between(xValue, masterRow[3].x - 2, masterRow[4].x - 1)) {
-                        rowArray[3] = text;
-                    } else if (numberUtil.between(xValue, masterRow[4].x - 2, masterRow[5].x - 1)) {
-                        rowArray[4] = text;
-                    } else if (numberUtil.between(xValue, masterRow[5].x - 2, masterRow[6].x - 1)) {
-                        rowArray[5] = text;
-                    } else if (numberUtil.between(xValue, masterRow[6].x - 2, 120)) {
-                        rowArray[6] = text;
-                    } else {
-                        console.log('else: ' + xValue + ' ' + text);
-                    }
-                });
-
-                return rowArray;
+                if (isBeetween(xValue, masterRow[0].x, masterRow[1].x)) {
+                    rowArray[0] = text;
+                } else if (isBeetween(xValue, masterRow[1].x, masterRow[2].x)) {
+                    rowArray[1] = text;
+                } else if (isBeetween(xValue, masterRow[2].x, masterRow[3].x)) {
+                    rowArray[2] = text;
+                } else if (isBeetween(xValue, masterRow[3].x, masterRow[4].x)) {
+                    rowArray[3] = text;
+                } else if (isBeetween(xValue, masterRow[4].x, masterRow[5].x)) {
+                    rowArray[4] = text;
+                } else if (isBeetween(xValue, masterRow[5].x, masterRow[6].x)) {
+                    rowArray[5] = text;
+                } else if (isBeetween(xValue, masterRow[6].x, 121)) {
+                    rowArray[6] = text;
+                } else {
+                    console.log('else: ' + xValue + ' ' + text);
+                }
             });
-        };
+
+            return rowArray;
+        });
     },
 
     name: function (name, corrections) {

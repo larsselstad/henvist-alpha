@@ -48,7 +48,6 @@ function testEnd(testName, errors) {
             console.log(el);
         });
     }
-
 }
 
 module.exports = {
@@ -85,7 +84,7 @@ module.exports = {
                 page.Texts.forEach(pageUtil.extractRows(grid));
             });
 
-            var workGrid = pageUtil.mapRow(grid[2])(grid);
+            var workGrid = pageUtil.mapRow(grid, grid[2]);
 
             var errors = [];
 
@@ -170,7 +169,7 @@ module.exports = {
                 page.Texts.forEach(pageUtil.extractRows(grid));
             });
 
-            var workGrid = pageUtil.mapRow(grid[2])(grid);
+            var workGrid = pageUtil.mapRow(grid, grid[2]);
 
             var errors = [];
 
