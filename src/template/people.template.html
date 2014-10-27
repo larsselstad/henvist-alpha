@@ -1,27 +1,19 @@
-<h2>{{=it.tittel}}</h2>
+<h1>{{=it.tittel}}</h1>
 
 <table>
     <tr>
-        <th>Navn</th>
-        <th>Praksisadr</th>
-        <th>Postadresse</th>
-        <th>Poststed</th>
-        <th>Tlf. praksis</th>
-        <th>Avtale</th>
-        <th>Kommentar</th>
+        {{~it.headerRow : header}}
+        <th>{{=header.text}}</th>
+        {{~}}
     </tr>
 
     <!-- for loop -->
 
-    {{~it.personer : person}}
+    {{~it.people : people}}
     <tr>
-        <td>{{=person.name}}</td>
-        <td>{{=person.workAdress}}</td>
-        <td>{{=person.mailAdress}}</td>
-        <td>{{=person.mailPostal}}</td>
-        <td>{{=person.phone}}</td>
-        <td>{{=person.time}}</td>
-        <td>{{=person.comment}}</td>
+        {{~people : p}}
+        <td>{{=p || ''}}</td>
+        {{~}}
     </tr>
     {{~}}
 </table>

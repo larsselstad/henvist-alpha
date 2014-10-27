@@ -23,15 +23,17 @@ pdfParser.on("pdfParser_dataReady", function (pdfData) {
     var grid = [];
 
     pdfData.data.Pages.forEach(function (page) {
-        page.Texts.forEach(pageUtil.extractPage(grid));
+        page.Texts.forEach(pageUtil.extractRows(grid));
     });
 
-    var pagesData = pageUtil.extractData(grid, {
+    var workGrid = pageUtil.mapRow(grid, grid[2]);
+
+    var pagesData = pageUtil.extractData2(workGrid, {
         'Psykologer:': 'Psykologer:',
         'Nevropsykologer:': 'Nevropsykologer:'
-    }, corrections);
+    });
 
-    htmlMaker(root, __dirname, 'Psykologer', pagesData['Psykologer:']);
+    htmlMaker(root, __dirname, 'Psykologer', grid[2], pagesData['Psykologer:']);
 });
 
 pdfParser.on("pdfParser_dataError", function (data) {

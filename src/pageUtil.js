@@ -228,6 +228,50 @@ var pageUtil = {
         });
 
         return data;
+    },
+
+    extractData2: function (grid, categories) {
+        if (!grid) {
+            throw new TypeError('extractData needs grid');
+        }
+        if (!categories) {
+            throw new TypeError('extractData needs categories');
+        }
+
+        var pageUtil = this,
+            data = {},
+            currentCategory;
+
+        grid.forEach(function (row, i) {
+            var r = row.filter(function (el) {
+                return el !== '';
+            });
+
+            if (r.length === 1 && i === 0) {
+                //console.log('Legger inn sist endret');
+
+                data.lastUpdate = r[0];
+            } else if (r.length === 1) {
+                //console.log('1 celle: ' + r);
+
+                if (categories.hasOwnProperty(r[0])) {
+                    //console.log('Legger til kategori: ' + r[0]);
+
+                    currentCategory = r[0];
+
+                    data[currentCategory] = [];
+                }
+            } else {
+                if (data[currentCategory]) {
+                    //console.log('Legger til rad: ' + row + ' i kategori: ' + currentCategory);
+                    data[currentCategory].push(row);
+                } else {
+                    console.log('Rad som ikke er i en kategori: ' + row);
+                }
+            }
+        });
+
+        return data;
     }
 };
 

@@ -4,7 +4,7 @@
 var fs = require('fs'),
     dot = require('dot');
 
-module.exports = function (root, dir, title, people) {
+module.exports = function (root, dir, title, headerRow, people) {
     var pageTemplate = fs.readFileSync(root + '/src/template/page.template.html', 'utf8');
     var peopleTemplate = fs.readFileSync(root + '/src/template/people.template.html', 'utf8');
 
@@ -16,7 +16,8 @@ module.exports = function (root, dir, title, people) {
     var pageRes = pageTempFn({
         body: peopleTempFn({
             tittel: title,
-            personer: people
+            headerRow: headerRow,
+            people: people
         }),
         title: title
     });
