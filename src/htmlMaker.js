@@ -10,6 +10,8 @@ module.exports = function (dir, params) {
 
     var html = fs.createWriteStream(dir + '/index.html');
 
+    dot.templateSettings.strip = false;
+
     var peopleTempFn = dot.template(peopleTemplate);
     var pageTempFn = dot.template(pageTemplate);
 
