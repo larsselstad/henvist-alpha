@@ -2,14 +2,11 @@ Viktig
 + egen mappe og fil for nevropsykologer
 + sett title i template
 + E2E tester: To test pdfer: Riktig data hentes ut i 2d array
-- E2E tester: To test pdfer: Riktig data hentes ut av 2d array til object
 + Sider viser sist oppdatert
-- design: tabell eller liste
-- Sider viser kilde
-- E2E tester: Sjekk corrections
 + wrapper fn rundt lesing av PDF og skriving av HMTL
 + fjern ubrukt kode
 + rydd opp i unittester
+- E2E tester: To test pdfer: Riktig data hentes ut av 2d array til object
 
 Passe
 - dot skriver ut templates med linjeskift
@@ -25,6 +22,9 @@ Framtidige utfordringer
 - Meny på siden
 - Forside
 - Undersider
+- design: tabell eller liste
+- Sider viser kilde
+- E2E tester: Sjekk corrections
 
 Etter designet er landet
 - E2E tester: Sjekk at html blir generert, og med riktig data
