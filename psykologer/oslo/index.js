@@ -2,7 +2,7 @@
 
 var root = process.cwd();
 
-var pdfToHtml = require(root + '/src/pdfDataToHtml');
+var pdfToHtml = require(root + '/src/pdfToHtml');
 
 var corrections = {
     name: {
