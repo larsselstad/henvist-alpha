@@ -8,5 +8,4 @@ function runTest(testObj) {
     }
 }
 
-runTest(require('./numberUtil.test'));
 runTest(require('./pageUtil.test'));

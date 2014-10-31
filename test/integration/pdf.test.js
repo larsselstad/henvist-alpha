@@ -5,8 +5,7 @@ var root = process.cwd();
 var assert = require('assert'),
     fs = require('fs'),
     PDFParser = require("pdf2json/pdfparser"),
-    pageUtil = require(root + '/src/pageUtil'),
-    numberUtil = require(root + '/src/numberUtil');
+    pageUtil = require(root + '/src/pageUtil');
 
 function ass(expect, actual) {
     try {

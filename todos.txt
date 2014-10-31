@@ -8,8 +8,8 @@ Viktig
 - Sider viser kilde
 - E2E tester: Sjekk corrections
 - wrapper fn rundt lesing av PDF og skriving av HMTL
-- fjern ubrukt kode
-- rydd opp i unittester
++ fjern ubrukt kode
++ rydd opp i unittester
 
 Passe
 - dot skriver ut templates med linjeskift
