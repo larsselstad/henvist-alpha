@@ -4,22 +4,23 @@
 var fs = require('fs'),
     dot = require('dot');
 
-module.exports = function (root, dir, title, headerRow, people) {
-    var pageTemplate = fs.readFileSync(root + '/src/template/page.template.html', 'utf8');
-    var peopleTemplate = fs.readFileSync(root + '/src/template/people.template.html', 'utf8');
+module.exports = function (params) {
+    var pageTemplate = fs.readFileSync(params.root + '/src/template/page.template.html', 'utf8');
+    var peopleTemplate = fs.readFileSync(params.root + '/src/template/people.template.html', 'utf8');
 
-    var html = fs.createWriteStream(dir + '/index.html');
+    var html = fs.createWriteStream(params.dir + '/index.html');
 
     var peopleTempFn = dot.template(peopleTemplate);
     var pageTempFn = dot.template(pageTemplate);
 
     var pageRes = pageTempFn({
         body: peopleTempFn({
-            tittel: title,
-            headerRow: headerRow,
-            people: people
+            title: params.title,
+            headerRow: params.headerRow,
+            people: params.people,
+            lastUpdate: params.lastUpdate
         }),
-        title: title
+        title: params.title
     });
 
     html.end(pageRes);
