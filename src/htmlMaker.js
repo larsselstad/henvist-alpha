@@ -4,9 +4,9 @@
 var fs = require('fs'),
     dot = require('dot');
 
-module.exports = function (root, dir, params) {
-    var pageTemplate = fs.readFileSync(root + '/src/template/page.template.html', 'utf8');
-    var peopleTemplate = fs.readFileSync(root + '/src/template/people.template.html', 'utf8');
+module.exports = function (dir, params) {
+    var pageTemplate = fs.readFileSync(__dirname + '/template/page.template.html', 'utf8');
+    var peopleTemplate = fs.readFileSync(__dirname + '/template/people.template.html', 'utf8');
 
     var html = fs.createWriteStream(dir + '/index.html');
 

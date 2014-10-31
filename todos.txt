@@ -7,7 +7,7 @@ Viktig
 - design: tabell eller liste
 - Sider viser kilde
 - E2E tester: Sjekk corrections
-- wrapper fn rundt lesing av PDF og skriving av HMTL
++ wrapper fn rundt lesing av PDF og skriving av HMTL
 + fjern ubrukt kode
 + rydd opp i unittester
 
