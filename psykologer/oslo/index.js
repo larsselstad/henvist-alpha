@@ -48,9 +48,7 @@ pdfParser.on("pdfParser_dataReady", function (pdfData) {
         'Nevropsykologer:': 'Nevropsykologer:'
     });
 
-    htmlMaker({
-        root: root,
-        dir: __dirname,
+    htmlMaker(root, __dirname, {
         title: 'Psykologer',
         headerRow: grid[2],
         people: pagesData['Psykologer:'],
