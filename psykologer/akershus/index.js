@@ -6,7 +6,13 @@ var pdfToHtml = require(root + '/src/pdfToHtml');
 
 var pathToPdf = __dirname + "/Psykologer_Akershus_telefonliste.pdf";
 
-pdfToHtml(pathToPdf, {
-    'Psykologer:': 'Psykologer:',
-    'Nevropsykologer:': 'Nevropsykologer:'
-}, 'Psykologer', 'Psykologer:', __dirname);
+pdfToHtml({
+    categories: {
+        'Psykologer:': 'Psykologer:',
+        'Nevropsykologer:': 'Nevropsykologer:'
+    },
+    dir: __dirname,
+    pageTitle: 'Psykologer i Akershus',
+    pagesDataKey: 'Psykologer:',
+    pathToPdf: pathToPdf
+});

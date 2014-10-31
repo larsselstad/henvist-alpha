@@ -25,7 +25,13 @@ var corrections = {
 
 var pathToPdf = __dirname + "/Psykologer_Oslo_telefonliste.pdf";
 
-pdfToHtml(pathToPdf, {
-    'Psykologer:': 'Psykologer:',
-    'Nevropsykologer:': 'Nevropsykologer:'
-}, 'Psykologer', 'Psykologer:', __dirname);
+pdfToHtml({
+    categories: {
+        'Psykologer:': 'Psykologer:',
+        'Nevropsykologer:': 'Nevropsykologer:'
+    },
+    dir: __dirname,
+    pageTitle: 'Psykologer i Oslo',
+    pagesDataKey: 'Psykologer:',
+    pathToPdf: pathToPdf
+});

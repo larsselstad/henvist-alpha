@@ -7,7 +7,7 @@ var fs = require('fs'),
     pageUtil = require('./pageUtil'),
     htmlMaker = require('./htmlMaker');
 
-module.exports = function (pathToPdf, categories, pageTitle, pagesDataKey, dir) {
+module.exports = function (params) {
     var pdfParser = new PDFParser();
 
     // denne bør bare returnere grid
@@ -21,21 +21,21 @@ module.exports = function (pathToPdf, categories, pageTitle, pagesDataKey, dir) 
 
         var workGrid = pageUtil.mapRow(grid, grid[2]);
 
-        var pagesData = pageUtil.extractData2(workGrid, categories);
+        var pagesData = pageUtil.extractData2(workGrid, params.categories);
 
-        htmlMaker(dir, {
-            title: pageTitle,
+        htmlMaker(params.dir, {
+            title: params.pageTitle,
             headerRow: grid[2],
-            people: pagesData[pagesDataKey],
+            people: pagesData[params.pagesDataKey],
             lastUpdate: pagesData.lastUpdate
         });
     });
 
     pdfParser.on("pdfParser_dataError", function (data) {
-        console.log('error reading: ' + pathToPdf);
+        console.log('error reading: ' + params.pathToPdf);
     });
 
-    fs.readFile(pathToPdf, function (err, pdfBuffer) {
+    fs.readFile(params.pathToPdf, function (err, pdfBuffer) {
         if (!err) {
             pdfParser.parseBuffer(pdfBuffer);
         }
