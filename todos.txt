@@ -1,11 +1,11 @@
 Viktig
 + egen mappe og fil for nevropsykologer
 + sett title i template
++ E2E tester: To test pdfer
 - Sider viser sist oppdatert og kilde
-- E2E tester: En test pdf
-- E2E tester: Sjekk at html blir generert, og med riktig data
-- E2E tester: Sjekk corrections
 - design: tabell eller liste
+- Sider viser kilde
+- E2E tester: Sjekk corrections
 
 Passe
 - dot skriver ut templates med linjeskift
@@ -16,9 +16,11 @@ Kanskje
 - Må jeg merge inn master i gh-pages. Kjedelig å måtte dele all historikk mellom de to
 - Programmeringsspråk: Norsk eller engelsk
 
-
 Framtidige utfordringer
-- PDFer med forskjellige bredder på kolonnene
++ PDFer med forskjellige bredder på kolonnene
 - Meny på siden
 - Forside
 - Undersider
+
+Etter designet er landet
+- E2E tester: Sjekk at html blir generert, og med riktig data
