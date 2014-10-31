@@ -23,7 +23,9 @@ var pdfParser = new PDFParser();
 // denne bør bare returnere grid
 // løses med ett async/promise biblotek
 pdfParser.on("pdfParser_dataReady", function (pdfData) {
-    var grid = [];
+    console.log('This file is dead');
+
+    /*var grid = [];
 
     pdfData.data.Pages.forEach(function (page) {
         page.Texts.forEach(pageUtil.extractPage(grid));
@@ -34,7 +36,7 @@ pdfParser.on("pdfParser_dataReady", function (pdfData) {
         'Nevropsykologer:': 'Nevropsykologer:'
     }, corrections);
 
-    htmlMaker(root, __dirname, 'Nevropsykologer', pagesData['Nevropsykologer:']);
+    htmlMaker(root, __dirname, 'Nevropsykologer', pagesData['Nevropsykologer:']);*/
 });
 
 pdfParser.on("pdfParser_dataError", function (data) {
