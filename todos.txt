@@ -9,8 +9,8 @@ Viktig
 - E2E tester: To test pdfer: Riktig data hentes ut av 2d array til object
 
 Passe
-- dot skriver ut templates med linjeskift
-- Eget script i package.json for run
++ dot skriver ut templates med linjeskift
++ Eget script i package.json for run
 - Eget script i package.json for deploy
 
 Kanskje
