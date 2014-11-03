@@ -33,5 +33,6 @@ pdfToHtml({
     dir: __dirname,
     pageTitle: 'Psykologer i Oslo',
     pagesDataKey: 'Psykologer:',
-    pathToPdf: pathToPdf
+    pathToPdf: pathToPdf,
+    headerIndex: 2
 });

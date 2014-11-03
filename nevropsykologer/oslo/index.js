@@ -23,5 +23,6 @@ pdfToHtml({
     dir: __dirname,
     pageTitle: 'Nevropsykologer i Oslo',
     pagesDataKey: 'Nevropsykologer:',
-    pathToPdf: pathToPdf
+    pathToPdf: pathToPdf,
+    headerIndex: 2
 });

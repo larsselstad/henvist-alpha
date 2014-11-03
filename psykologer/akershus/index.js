@@ -14,5 +14,6 @@ pdfToHtml({
     dir: __dirname,
     pageTitle: 'Psykologer i Akershus',
     pagesDataKey: 'Psykologer:',
-    pathToPdf: pathToPdf
+    pathToPdf: pathToPdf,
+    headerIndex: 2
 });

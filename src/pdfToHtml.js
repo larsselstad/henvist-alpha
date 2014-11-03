@@ -13,19 +13,23 @@ module.exports = function (params) {
     // denne bør bare returnere grid
     // løses med ett async/promise biblotek
     pdfParser.on("pdfParser_dataReady", function (pdfData) {
+        console.log('Reading file: ' + params.pathToPdf);
+
         var grid = [];
 
         pdfData.data.Pages.forEach(function (page) {
             page.Texts.forEach(pageUtil.extractRows(grid));
         });
 
-        var workGrid = pageUtil.mapRow(grid, grid[2]);
+        var workGrid = pageUtil.mapRow(grid, grid[params.headerIndex]);
+
+        console.log('Headerrow: ' + workGrid[params.headerIndex]);
 
         var pagesData = pageUtil.extractData2(workGrid, params.categories);
 
         htmlMaker(params.dir, {
             title: params.pageTitle,
-            headerRow: grid[2],
+            headerRow: grid[params.headerIndex],
             people: pagesData[params.pagesDataKey],
             lastUpdate: pagesData.lastUpdate
         });
@@ -38,6 +42,8 @@ module.exports = function (params) {
     fs.readFile(params.pathToPdf, function (err, pdfBuffer) {
         if (!err) {
             pdfParser.parseBuffer(pdfBuffer);
+        } else {
+            console.error('Error reading file: ' + params.pathToPdf);
         }
     });
 };
