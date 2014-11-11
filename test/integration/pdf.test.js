@@ -82,8 +82,8 @@ module.exports = {
             pdfData.data.Pages.forEach(function (page) {
                 page.Texts.forEach(pageUtil.extractRows(grid));
             });
-
-            var workGrid = pageUtil.mapRow(grid, grid[2]);
+            
+            var workGrid = grid.map(pageUtil.joinCells).map(pageUtil.mapRow(2));
 
             var errors = [];
 
@@ -168,7 +168,7 @@ module.exports = {
                 page.Texts.forEach(pageUtil.extractRows(grid));
             });
 
-            var workGrid = pageUtil.mapRow(grid, grid[2]);
+            var workGrid = grid.map(pageUtil.joinCells).map(pageUtil.mapRow(2));
 
             var errors = [];
 
@@ -208,6 +208,87 @@ module.exports = {
                 '92273322',
                 '100'
             ]));
+
+            /*
+            var pagesData = pageUtil.extractData(grid, {
+                'Psykologer:': 'Psykologer:',
+                'Nevropsykologer:': 'Nevropsykologer:'
+            }, corrections);*/
+
+            //htmlMaker(root, __dirname, 'Psykologer', pagesData['Psykologer:']);
+
+            testEnd('extractingPsykologerAkershusTest', errors.filter(isEmpty));
+        });
+
+        pdfParser.on("pdfParser_dataError", function (data) {
+            console.log('error!');
+        });
+
+        fs.readFile(pathToPdf, function (err, pdfBuffer) {
+            if (!err) {
+                pdfParser.parseBuffer(pdfBuffer);
+            }
+        });
+    },
+    extractingPsykologerBuskerudTest: function () {
+        var corrections = {};
+
+        var pathToPdf = __dirname + "/Psykologer Buskerud telefonliste.pdf";
+
+        var pdfParser = new PDFParser();
+
+        // denne bør bare returnere grid
+        // løses med ett async/promise biblotek
+        pdfParser.on("pdfParser_dataReady", function (pdfData) {
+            var grid = [];
+
+            pdfData.data.Pages.forEach(function (page) {
+                page.Texts.forEach(pageUtil.extractRows(grid));
+            });
+
+            //console.log(grid);
+
+            var workGrid = grid.map(pageUtil.joinCells).map(pageUtil.mapRow(1));
+
+            //console.log(workGrid);
+
+            var errors = [];
+
+            errors.push(ass(workGrid.length, 28));
+
+            errors.push(ass(workGrid[0][3], 'Sist endret 29.10.2014'));
+            errors.push(ass(workGrid[27][0], 'Helse Sør-Øst RHF, Kjøp av helsetjenester, tlf. 02411'));
+
+            errors.push(assertArray(workGrid[1], [
+                'Navn',
+                'Praksisadr, hvis ulik postadresse',
+                'Postadresse',
+                'Poststed',
+                'Tlf. praksis',
+                'Avtalt %'
+            ]));
+
+            errors.push(assertArray(workGrid[2], ['Psykologer:', , , , , , ]));
+
+            /*errors.push(assertArray(workGrid[4], [
+                'Anthi, Per Roar',
+                'Follo',
+                'Idrettsvn. 27 b,',
+                ,
+                '1400 Ski',
+                '64873073',
+                '100'
+            ]));
+
+            errors.push(assertArray(workGrid[5], [
+                'Arentz-Hansen, Erik',
+                'Follo',
+                'Kolbotnvn. 7, 5.etg',
+                'Postboks 532',
+                '1411 Kolbotn',
+                '92273322',
+                '100'
+            ]));*/
 
             /*
             var pagesData = pageUtil.extractData(grid, {

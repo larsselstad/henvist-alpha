@@ -7,11 +7,9 @@ var assert = require('assert'),
 
 function makeTextValue(word, x, y) {
     return {
-        R: [
-            {
-                T: encodeURIComponent(word),
-                }
-            ],
+        R: [{
+            T: encodeURIComponent(word)
+            }],
         x: x,
         y: y
     };
@@ -87,5 +85,54 @@ module.exports = {
         assertObject(grid[8][0], data['Category: 2'][0][0]);
         assertObject(grid[9][0], data['Category: 2'][1][0]);
         assertObject(grid[11][0], data['Category: 2'][2][0]);
+    },
+    extractRowTest: function () {
+        var grid = [];
+        var texts = [makeTextValue('row1 - 0', 0, 0.12),
+                     makeTextValue('row2 - 0', 4, 33.16),
+                     makeTextValue('row3 - 0a', 0, 4.748),
+                     makeTextValue('row3 - 0b', 0, 4.088),
+                     makeTextValue('row3 - 1', 4, 4.748),
+                     makeTextValue('row4 - 0', 0, 32.12),
+                     makeTextValue('row4 - 1', 4, 32.12),
+                    ];
+
+        texts.forEach(pageUtil.extractRows(grid));
+
+        assert.equal(grid[0][0].text, 'row1 - 0');
+        assert.equal(grid[1][0].text, 'row2 - 0');
+
+        assert.equal(grid[2][0].text, 'row3 - 0a');
+        assert.equal(grid[2][1].text, 'row3 - 0b');
+        assert.equal(grid[2][2].text, 'row3 - 1');
+
+        assert.equal(grid[3][0].text, 'row4 - 0');
+        assert.equal(grid[3][1].text, 'row4 - 1');
+    },
+    joinCellsTest: function () {
+        var grid = [
+            [
+                { text: 'Navn', x: 9, y: 47 },
+                { text: 'Praksisadr, hvis ulik', x: 25, y: 41 },
+                { text: 'postadresse', x: 25, y: 47 },
+                { text: 'Postadresse', x: 47, y: 47 },
+                { text: 'Poststed', x: 64, y: 47 },
+                { text: 'Tlf. praksis', x: 79, y: 47 },
+                { text: 'Avtalt %', x: 87, y: 47 }
+            ],
+            [
+                { text: 'Ahmadzadeh, Vali', x: 9, y: 65 },
+                { text: 'Nedre Storgate 13', x: 47, y: 65 },
+                { text: '3015 Drammen', x: 64, y: 65 },
+                { text: '47279964', x: 80, y: 65 },
+                { text: '100', x: 91, y: 65 }
+            ]
+        ];
+        
+        var newGrid = grid.map(pageUtil.joinCells);
+        
+        assert.equal(newGrid[0][0], grid[0][0]);
+        assert.equal(newGrid[0][1].text, 'Praksisadr, hvis ulik postadresse');
+        assert.equal(newGrid[0][2].text, 'Postadresse');
     }
 };

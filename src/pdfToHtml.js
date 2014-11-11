@@ -21,15 +21,20 @@ module.exports = function (params) {
             page.Texts.forEach(pageUtil.extractRows(grid));
         });
 
-        var workGrid = pageUtil.mapRow(grid, grid[params.headerIndex]);
+        console.log(grid);
+        
+        var workGrid = grid.map(pageUtil.joinCells).map(pageUtil.mapRow(params.headerIndex));
 
+        console.log(workGrid);
+        
         console.log('Headerrow: ' + workGrid[params.headerIndex]);
+        console.log('Headerrow: ' + grid[params.headerIndex]);
 
         var pagesData = pageUtil.extractData2(workGrid, params.categories);
 
         htmlMaker(params.dir, {
             title: params.pageTitle,
-            headerRow: grid[params.headerIndex],
+            headerRow: workGrid[params.headerIndex],
             people: pagesData[params.pagesDataKey],
             lastUpdate: pagesData.lastUpdate
         });

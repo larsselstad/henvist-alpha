@@ -1,6 +1,14 @@
 /*jshint node: true*/
-function almostEqual(a, b) {
-    return a === b || a === (b + 1) || a === (b - 1);
+function isNewRow(a, b) {
+    // a is almost equal b
+    if (a === b || a === (b + 1) || a === (b - 1)) {
+        return false;
+    } else if (a > b && a < (b + 10)) {
+        // b is slitly smaller then a
+        return false;
+    } else {
+        return true;
+    }
 }
 
 function findIndex(array, xValue) {
@@ -29,33 +37,39 @@ function formatPhoneNumber(phoneNumber) {
     }
 }
 
+function makeTextObject(textValue) {
+    return {
+        text: decodeURIComponent(textValue.R[0].T).trim(),
+        x: parseInt(textValue.x, 10),
+        y: Math.round(parseFloat(textValue.y) * 10)
+    };
+}
+
 var pageUtil = {
     extractRows: function (grid) {
-        var lastY,
+        var rowY,
             rowArray;
 
         return function (textValue) {
-            var text = decodeURIComponent(textValue.R[0].T).trim();
-            var circaX = parseInt(textValue.x, 10);
-            var circaY = Math.round(parseFloat(textValue.y) * 10);
+            var obj = makeTextObject(textValue);
 
-            if (!almostEqual(lastY, circaY)) {
-                rowArray = [];
+            if (isNewRow(rowY, obj.y)) {
+                // add object to new row
+                rowArray = [obj];
 
                 grid.push(rowArray);
+
+                // set y-coordinate that will be this rows y-base
+                rowY = obj.y;
+            } else {
+                rowArray.push(obj);
             }
-
-            rowArray.push({
-                text: text,
-                x: circaX
-            });
-
-            lastY = circaY;
         };
     },
 
-    mapRow: function (grid, masterRow) {
-        return grid.map(function (row) {
+    mapRow: function (masterRowIndex) {
+        return function (row, i, array) {
+            var masterRow = array[masterRowIndex];
             var rowArray = new Array(masterRow.length);
 
             row.forEach(function (el) {
@@ -63,7 +77,21 @@ var pageUtil = {
             });
 
             return rowArray;
-        });
+        };
+    },
+
+    joinCells: function (row) {
+        return row.reduce(function(newRow, el, i) {
+            var prevEl = newRow[i - 1];
+            
+            if (prevEl && prevEl.y < el.y) {
+                prevEl.text += ' ' + el.text;
+            } else {
+                newRow.push(el);
+            }
+            
+            return newRow;
+        }, []);
     },
 
     extractData2: function (grid, categories) {
