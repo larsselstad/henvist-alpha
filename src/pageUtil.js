@@ -84,7 +84,7 @@ var pageUtil = {
         return row.reduce(function(newRow, el, i) {
             var prevEl = newRow[i - 1];
             
-            if (prevEl && prevEl.y < el.y) {
+            if (prevEl && (prevEl.y + 1) < el.y) {
                 prevEl.text += ' ' + el.text;
             } else {
                 newRow.push(el);

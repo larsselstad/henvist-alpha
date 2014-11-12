@@ -121,6 +121,15 @@ module.exports = {
                 '100',
              ]));
 
+            errors.push(assertArray(workGrid[21], [
+                'Holen, Linda Støylen',
+                'c/o Amathea',
+                'Pilestredet Park 7',
+                '0176 Oslo',
+                '95146126',
+                '100'
+             ]));
+
             errors.push(assertArray(workGrid[155], [
                 'Reiersen Odd-Arne',
                 'Nevropsykologisk Senter',
