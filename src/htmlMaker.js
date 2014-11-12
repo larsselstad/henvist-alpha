@@ -21,4 +21,6 @@ module.exports = function (dir, params) {
     });
 
     html.end(pageRes);
+    
+    console.log('Generated: ' + dir + '/index.html');
 };

@@ -21,14 +21,13 @@ module.exports = function (params) {
             page.Texts.forEach(pageUtil.extractRows(grid));
         });
 
-        console.log(grid);
+        //console.log(grid);
         
         var workGrid = grid.map(pageUtil.joinCells).map(pageUtil.mapRow(params.headerIndex));
 
-        console.log(workGrid);
+        //console.log(workGrid);
         
         console.log('Headerrow: ' + workGrid[params.headerIndex]);
-        console.log('Headerrow: ' + grid[params.headerIndex]);
 
         var pagesData = pageUtil.extractData2(workGrid, params.categories);
 
@@ -38,6 +37,8 @@ module.exports = function (params) {
             people: pagesData[params.pagesDataKey],
             lastUpdate: pagesData.lastUpdate
         });
+        
+        console.log('---');
     });
 
     pdfParser.on("pdfParser_dataError", function (data) {
