@@ -6,7 +6,7 @@ Viktig
 + wrapper fn rundt lesing av PDF og skriving av HMTL
 + fjern ubrukt kode
 + rydd opp i unittester
-- Lag scripts for mapper som mangler
++ Lag scripts for mapper som mangler
 - Få inn corrections
 - E2E tester: To test pdfer: Riktig data hentes ut av 2d array til object
 - Er det mulig å lese PDFen på en bedre måte? Hedmark PDFen bommer på telefonnummer fordi den headeren er høyrestilt
