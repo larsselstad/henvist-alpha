@@ -4,7 +4,7 @@ var root = process.cwd();
 
 var pdfToHtml = require(root + '/src/pdfToHtml');
 
-var pathToPdf = __dirname + "/Psykologer Buskerud telefonliste.pdf";
+var pathToPdf = root + "/data/Psykologer Buskerud telefonliste.pdf";
 
 pdfToHtml({
     categories: {

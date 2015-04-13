@@ -23,7 +23,7 @@ var corrections = {
     }
 };
 
-var pathToPdf = __dirname + "/Psykologer_Oslo_telefonliste.pdf";
+var pathToPdf = root + "/data/Psykologer_Oslo_telefonliste.pdf";
 
 pdfToHtml({
     categories: {
