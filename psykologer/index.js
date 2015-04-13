@@ -22,7 +22,7 @@ var links = dirs.map(function(el) {
 var today = new Date();
 
 htmlMaker(__dirname, {
-    title: 'henvist.no > Psykologer',
+    title: 'Psykologer',
     headerRow: ['Fylker'],
     people: links,
     lastUpdate: today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear()
